@@ -71,7 +71,6 @@ We anticipate that fine-tuned transformer models will outperform unsupervised me
 ## Gantt Chart
 
 ![Gantt Chart](assets/css/gantt-chart.png)  
-*Add your Gantt Chart image in the assets folder.*
 
 ---
 
