@@ -83,3 +83,7 @@ We anticipate that fine-tuned transformer models will outperform unsupervised me
 | Shinhaeng Lee      | Data augmentation, preprocessing                    |
 | Wei Hong Low       | Literature review, model evaluation                 |
 | Abhijith Sreeraj   | Report writing, visualization                       |
+
+## Video Link
+
+https://youtu.be/cke5F-7VIsE
