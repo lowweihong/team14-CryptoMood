@@ -17,10 +17,11 @@ Tree structure:
 src/
 ├── data/
 │   ├── eda.ipynb                   # Data Exploration
-│   └── template.ipynb         # Data cleaning and preprocessing scripts
+│   └── template.ipynb              # Data cleaning and preprocessing scripts
 │
 └── models/
-   └── BERT.py                      # Experiments on BERT models
+   └── crypto_bert.ipynb            # Experiments with BERT base model 
+   └── crypto_bert_kk08.ipynb       # Experiments with LORA
 
 ```
 
