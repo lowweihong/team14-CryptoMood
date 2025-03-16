@@ -30,8 +30,11 @@ The approach involves two primary components: data preprocessing and machine lea
 
 ### Data Preprocessing
 1) **Cleaning:** Remove unnecessary elements such as crypto wallet addresses, URLs, and fix encoding errors. Filter noisy data to improve the quality of the dataset, similar to the preprocessing steps taken in cryptocurrency sentiment analysis research.
+
 2) **Augmentation:** Utilize large language models (LLMs) to generate synthetic data and rephrase tweets while preserving sentiment. This technique can help increase the size and diversity of the dataset, which is crucial for improving model performance.
+
 3) **Handling Imbalance:** Apply techniques such as upsampling or downsampling to balance the sentiment categories, ensuring that the model is not biased towards any particular class.
+
 4) **Word Embedding:** Transform text into numerical representations using Word2Vec or BERT embeddings. These embeddings capture contextual information and are effective for sentiment analysis tasks.
 
 ### ML Approaches
