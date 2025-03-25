@@ -8,20 +8,17 @@ For complete project report, please see [here](https://github.gatech.edu/pages/a
 - `/src/`: Main source code directory containing all project implementation
 - `/src/data/`: Contains data processing notebooks and scripts
 - `/src/data/eda.ipynb`: Exploratory data analysis notebook with visualizations and statistical analysis
-- `/src/data/template.ipynb`: Standardized data cleaning and feature engineering pipeline
-- `/src/models/`: Contains model implementations and training scripts
-- `/src/models/BERT.py`: BERT model implementation for sentiment analysis and experiments
+- `/src/models/`: Contains model training and inference scripts
 
 Tree structure:
 ```
 src/
-├── data/
+├── data_cleaning/
 │   ├── eda.ipynb                   # Data Exploration
-│   └── template.ipynb              # Data cleaning and preprocessing scripts
 │
 └── models/
-   └── crypto_bert.ipynb            # Experiments with BERT base model 
-   └── crypto_bert_kk08.ipynb       # Experiments with LORA
+   └── ElKulako_stocktwits_crypto_finetune.ipynb   # Experiments with pretrain Roberta model 
+   └── kk08_cryptobert_finetune.ipynb              # Experiments with pretrained Bert base model
 
 ```
 
