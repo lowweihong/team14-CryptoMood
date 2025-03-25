@@ -41,7 +41,13 @@ The approach involves two primary components: data preprocessing and machine lea
 - **Unsupervised:**  
   - **DBSCAN Clustering**: Apply DBSCAN to detect sentiment clusters in the data. This algorithm is useful for identifying patterns and outliers in high-density regions, which can help in understanding the distribution of sentiments
 - **Supervised:**  
-  - **Fine-Tuning Pre-Trained Transformers**: Fine-tune pre-trained transformer models like RoBERTa and XLM-RoBERTa by adding a dense layer for sentiment classification. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
+    1. Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels.
+    2. Finetune model using pretrain model kk08/CryptoBERT, the pretrain model originally has only bullish and bearish labels. Thus, will discard the pre-trained weights of the original 2-label classification head and initialize a new classification head with random weights for 3 labels.
+
+
+
+
+  Fine-tune pre-trained transformer models like RoBERTa and XLM-RoBERTa by adding a dense layer for sentiment classification. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
   - **BiLSTM Network**: Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets
 
 ### Libraries and Tools
@@ -69,9 +75,29 @@ The use of pre-trained models like CryptoBERT, as discussed by Kulakowski and Fr
 Moreover, the performance of our models will be evaluated using metrics such as the F1 score, which provides a balanced measure of precision and recall, especially useful in imbalanced datasets. Additionally, metrics like Cohen's Kappa can be employed to assess the agreement between model predictions and human annotations, accounting for chance agreement
 
 ## Result and Discussion (Midterm Checkpoint)
-### Data Preprocessing Method Implemented
+In midterm checkpoint, we developed the baseline model with naive Logistic Regression by considering only the words as feature, with the cleaning processing technique in [preprocessing.py](src/preprocessing.py). And a version of finetuning on `StephanAkkerman/financial-tweets-crypto` performance on the same train and test dataset.
+
+The reproducible notebooks used can be found here
+1. [EDA.ipynb](./src/data_cleaning/eda.ipynb) 
+2. [kk08_cryptobert_finetune.ipynb](./src/models/kk08_cryptobert_finetune.ipynb)
+3. [ElKulako_stocktwits_crypto_finetune.ipynb](./src/models/ElKulako_stocktwits_crypto_finetune.ipynb)
+4. [ElKulako_stocktwits_crypto_baseline.ipynb](./src/models/ElKulako_stocktwits_crypto_baseline.ipynb)
+
+
+### Model Performance
+Here is the model finetune model performance and also compared to the original baseline model ElKulako/stocktwits-crypto. The best performing model overall is kk08/CryptoBERT finetune with an overall accuracy of 75.01% and macro
+F1 score of 69.79%. Among our benchmarks, original ElKulako/stocktwits-crypto model has the least F1-score.
+
+| Model                               | Precision (Bullish) | Precision (Neutral) | Precision (Bearish) | Accuracy | F1-Score |
+|-------------------------------------|---------------------|---------------------|---------------------|----------|----------|
+| kk08/CryptoBERT finetune            | 81.79               | 65.55               | 62.19               | 75.01    | 69.79    |
+| ElKulako/stocktwits-crypto finetune | 80.01               | 63.33               | 64.42               | 74.10    | 68.39    |
+| ElKulako/stocktwits-crypto baseline | 69.79               | 17.17               | 26.42               | 39.05    | 33.68    |
 
 ### CryptoBERT Performance 
+
+
+### Summary & Next step
 
 ---
 
