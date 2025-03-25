@@ -17,10 +17,12 @@ Despite the existence of general sentiment models, there is a scarcity of models
 
 ## Problem Definition
 
-Current sentiment analysis models often struggle to accurately capture the unique and rapidly evolving terminology used in cryptocurrency discussions. This limitation is exacerbated by the high volatility and specialized nature of cryptocurrency markets, leading to suboptimal sentiment classification and potentially impacting trading decisions.
+Current sentiment analysis models often struggle to accurately capture the unique and rapidly evolving terminology used in cryptocurrency discussions. This limitation is exacerbated by the high volatility and specialized nature of cryptocurrency markets, leading to suboptimal sentiment classification and potentially impacting trading decisions. Currently, there are no open-source models specifically designed for analyzing crypto sentiment in tweets. The only existing model is limited to two predicted classes—bullish and negative—which fails to account for the prevalence of neutral sentiment in tweet text. To address this gap, there is a clear need for a three-class model that includes bullish, bearish, and neutral categories to better capture the full range of sentiments expressed on X platform.
+
+---
 
 **Motivation:**  
-There is a pressing need for a tailored model that incorporates domain-specific features from the financial sector, particularly those relevant to cryptocurrency markets. Such a model would provide more accurate and actionable sentiment analysis, enabling investors to make better-informed decisions in these volatile markets.
+The highly volatile nature of cryptocurrency markets demands sentiment analysis models that go beyond generic NLP techniques. Traditional models often fail to capture the nuances of financial discourse, market sentiment shifts, and domain-specific jargon unique to crypto. By incorporating domain-specific features tailored to the cryptocurrency sector, a specialized model can provide deeper insights, more accurate sentiment predictions, and ultimately empower investors with data-driven strategies to navigate market fluctuations effectively.
 
 ---
 
@@ -29,26 +31,33 @@ There is a pressing need for a tailored model that incorporates domain-specific 
 The approach involves two primary components: data preprocessing and machine learning techniques. Data preprocessing is crucial for ensuring that the dataset is clean and representative of the cryptocurrency domain, while the machine learning techniques are designed to effectively classify sentiments in social media posts.
 
 ### Data Preprocessing
-1) **Cleaning:** Remove unnecessary elements such as crypto wallet addresses, URLs, and fix encoding errors. Filter noisy data to improve the quality of the dataset, similar to the preprocessing steps taken in cryptocurrency sentiment analysis research.
+1) **Cleaning:** Remove unnecessary elements such as crypto wallet addresses, URLs, and fix encoding errors. Filter noisy data to improve the quality of the dataset, similar to the preprocessing steps taken in cryptocurrency sentiment analysis research. Additionally, exclude short texts (less than 4 words) and remove quote tweets (which combine original and quoted text) to avoid confusion in sentiment scoring, as the model may struggle to determine whether to provide sentiment score to the original, quoted, or combined text.
 
 2) **Augmentation:** Utilize large language models (LLMs) to generate synthetic data and rephrase tweets while preserving sentiment. This technique can help increase the size and diversity of the dataset, which is crucial for improving model performance.
 
 3) **Handling Imbalance:** Apply techniques such as upsampling or downsampling to balance the sentiment categories, ensuring that the model is not biased towards any particular class.
 
-4) **Word Embedding:** Transform text into numerical representations using Word2Vec or BERT embeddings. These embeddings capture contextual information and are effective for sentiment analysis tasks.
+4) **Text Embedding:** Transform text into numerical representations using BERT embeddings. These embeddings capture contextual information and are effective for sentiment analysis tasks.
+
+### Data Split
+For the train-validation-test split we used a randomly split according to a fix random seed on the dataset (88647 data points) as follows:
+
+80% - training set (36453 data points)
+10% - validation set (4556 data points)
+10% - test set (4558 data points)
+All of the splits have the similar distribution across each different classes.
+
 
 ### ML Approaches
 - **Unsupervised:**  
   - **DBSCAN Clustering**: Apply DBSCAN to detect sentiment clusters in the data. This algorithm is useful for identifying patterns and outliers in high-density regions, which can help in understanding the distribution of sentiments
 - **Supervised:**  
-    1. Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels.
-    2. Finetune model using pretrain model kk08/CryptoBERT, the pretrain model originally has only bullish and bearish labels. Thus, will discard the pre-trained weights of the original 2-label classification head and initialize a new classification head with random weights for 3 labels.
-
-
-
-
-  Fine-tune pre-trained transformer models like RoBERTa and XLM-RoBERTa by adding a dense layer for sentiment classification. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
-  - **BiLSTM Network**: Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets
+  - Bert Models
+    - Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels.
+    - Finetune model using pretrain model kk08/CryptoBERT, the pretrain model originally has only bullish and bearish labels. Thus, will discard the pre-trained weights of the original 2-label classification head and initialize a new classification head with random weights for 3 labels. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
+    - Both of these models train for 5 epoch, and select the best models in according to the least validation loss.
+  - BiLSTM model
+    - Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets
 
 ### Libraries and Tools
 These methods utilize libraries such as scikit-learn for clustering, Hugging Face transformers for pre-trained models, and PyTorch for implementing neural networks.
@@ -65,10 +74,10 @@ These methods utilize libraries such as scikit-learn for clustering, Hugging Fac
 
 **Evaluation Metrics:**  
 - **Accuracy:** This metric will assess the overall correctness of the model across all sentiment categories (bearish, neutral, bullish). It is particularly useful for balanced datasets.
-- **Precision and Recall:** These metrics will measure the true positive rate for each sentiment category. Precision will help evaluate how often the model correctly identifies a sentiment when it predicts it, while recall will assess how well the model captures all instances of a particular sentiment.
+- **Precision and F1-score:** These metrics will measure the true positive rate for each sentiment category. Precision will help evaluate how often the model correctly identifies a sentiment when it predicts it. The F1-score will provide a balanced evaluation by considering both precision and recall.
 
 **Expected Outcomes:**  
-We expect that fine-tuned transformer models, such as RoBERTa and XLM-RoBERTa, will outperform unsupervised methods like DBSCAN clustering and supervised BiLSTM networks. This is because transformer models are adept at capturing complex linguistic patterns and domain-specific terminology, which is crucial for accurately classifying sentiments in cryptocurrency-related texts.
+We expect that fine-tuned Bert models, will outperform unsupervised methods like DBSCAN clustering and supervised BiLSTM networks. This is because transformer models are adept at capturing complex linguistic patterns and domain-specific terminology, which is crucial for accurately classifying sentiments in cryptocurrency-related texts.
 
 The use of pre-trained models like CryptoBERT, as discussed by Kulakowski and Frasincar (2023), demonstrates the effectiveness of fine-tuning BERT-based models for cryptocurrency sentiment analysis. These models can better handle the nuances of cryptocurrency terminology and the dynamic nature of market sentiments compared to more general models.
 
@@ -92,9 +101,7 @@ F1 score of 69.79%. Among our benchmarks, original ElKulako/stocktwits-crypto mo
 |-------------------------------------|---------------------|---------------------|---------------------|----------|----------|
 | kk08/CryptoBERT finetune            | 81.79               | 65.55               | 62.19               | 75.01    | 69.79    |
 | ElKulako/stocktwits-crypto finetune | 80.01               | 63.33               | 64.42               | 74.10    | 68.39    |
-| ElKulako/stocktwits-crypto baseline | 69.79               | 17.17               | 26.42               | 39.05    | 33.68    |
-
-### CryptoBERT Performance 
+| ElKulako/stocktwits-crypto baseline | 70.30               | 17.00               | 25.34               | 38.99    | 33.11    |
 
 
 ### Summary & Next step
