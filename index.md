@@ -83,19 +83,39 @@ The use of pre-trained models like CryptoBERT, as discussed by Kulakowski and Fr
 
 Moreover, the performance of our models will be evaluated using metrics such as the F1 score, which provides a balanced measure of precision and recall, especially useful in imbalanced datasets. Additionally, metrics like Cohen's Kappa can be employed to assess the agreement between model predictions and human annotations, accounting for chance agreement
 
-## Result and Discussion (Midterm Checkpoint)
-In midterm checkpoint, we developed the baseline model with naive Logistic Regression by considering only the words as feature, with the cleaning processing technique in [preprocessing.py](src/preprocessing.py). And a version of finetuning on `StephanAkkerman/financial-tweets-crypto` performance on the same train and test dataset.
+## Results and Discussion (Midterm Checkpoint)
 
-The reproducible notebooks used can be found here
+In our midterm checkpoint, we developed the baseline model with naive Logistic Regression by considering only the words as features, with the cleaning processing technique in [preprocessing.py](src/preprocessing.py). We also implemented fine-tuned versions of pre-trained BERT models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
+
+The reproducible notebooks used can be found here:
 1. [EDA.ipynb](./src/data_cleaning/eda.ipynb) 
 2. [kk08_cryptobert_finetune.ipynb](./src/models/kk08_cryptobert_finetune.ipynb)
 3. [ElKulako_stocktwits_crypto_finetune.ipynb](./src/models/ElKulako_stocktwits_crypto_finetune.ipynb)
 4. [ElKulako_stocktwits_crypto_baseline.ipynb](./src/models/ElKulako_stocktwits_crypto_baseline.ipynb)
 
+### Data Preprocessing Implementation
+For our initial models, we implemented a comprehensive preprocessing pipeline that included:
 
-### Model Performance
-Here is the model finetune model performance and also compared to the original baseline model ElKulako/stocktwits-crypto. The best performing model overall is kk08/CryptoBERT finetune with an overall accuracy of 75.01% and macro
-F1 score of 69.79%. Among our benchmarks, original ElKulako/stocktwits-crypto model has the least F1-score.
+1. **Text Cleaning:** We removed unnecessary elements such as URLs, wallet addresses, and special characters using regex patterns in our `preprocessing.py` module.
+
+2. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
+
+3. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
+
+### Model Implementation and Evaluation
+
+We implemented several models to establish benchmarks and assess performance on our cryptocurrency sentiment classification task:
+
+#### Supervised Learning Models
+1. **Baseline Model:** A simple Logistic Regression model using word features to establish a performance baseline.
+
+2. **Fine-tuned BERT Models:**
+   - **ElKulako/stocktwits-crypto:** Fine-tuned from a model already trained on financial text with existing bullish, bearish, and neutral labels.
+   - **kk08/CryptoBERT:** Adapted from a model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
+
+#### Performance Metrics
+
+We evaluated our models using several key metrics:
 
 | Model                               | Precision (Bullish) | Precision (Neutral) | Precision (Bearish) | Accuracy | F1-Score |
 |-------------------------------------|---------------------|---------------------|---------------------|----------|----------|
@@ -103,13 +123,31 @@ F1 score of 69.79%. Among our benchmarks, original ElKulako/stocktwits-crypto mo
 | ElKulako/stocktwits-crypto finetune | 80.01               | 63.33               | 64.42               | 74.10    | 68.39    |
 | ElKulako/stocktwits-crypto baseline | 70.30               | 17.00               | 25.34               | 38.99    | 33.11    |
 
+![Model Performance Comparison](./assets/css/model_performance_comparison.png)
+*Figure 1: Performance metrics across different models showing precision for each sentiment class, overall accuracy, and F1-score.*
 
-### Summary & Next step
+### Analysis of Model Performance
+
+Our analysis of the model performance revealed several key insights:
+
+1. **Domain-Specific Pre-training Advantage:** The kk08/CryptoBERT model, which was pre-trained specifically on cryptocurrency text, outperformed the more general financial text model (ElKulako/stocktwits-crypto).
+
+2. **Class Imbalance Impact:** All models showed better performance on the majority class (Bullish) compared to minority classes (Neutral and Bearish).
+
+3. **Fine-tuning Benefits:** The significant performance gap between the fine-tuned models and the baseline demonstrates the effectiveness of transfer learning for this task.
+
+<!-- Suggestion: Add confusion matrix visualization to show classification patterns -->
+
+### Summary and Next Steps
+
 #### Summary
-summary goes here
+Our initial results demonstrate that fine-tuned transformer-based models can achieve promising performance on cryptocurrency sentiment analysis, with the best model (kk08/CryptoBERT) achieving 75.01% accuracy and a macro F1-score of 69.79%.
 
-#### Next Step
-1. For the next phase of our research, we plan to implement several unsupervised learning approaches to complement our supervised models. We will explore DBSCAN (Density-Based Spatial Clustering of Applications with Noise) as our primary clustering algorithm due to its ability to discover clusters of arbitrary shapes without requiring a predetermined number of clusters—a valuable feature when dealing with the nuanced language patterns in cryptocurrency discussions. Additionally, we intend to compare DBSCAN's performance with other clustering techniques such as K-means (for its simplicity and efficiency with large datasets) and BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) for its memory-efficient handling of large datasets. In theory, these unsupervised approaches will provide valuable insights into the natural groupings within cryptocurrency tweets that may not be captured by supervised models. By mapping these clusters to sentiment categories, we hope to identify linguistic patterns and topic-based sentiments that could enhance our overall classification framework. The implementation will involve converting tweets to embeddings using Sentence Transformers, applying dimensionality reduction techniques, and carefully tuning clustering parameters to achieve optimal results.
+#### Next Steps
+
+1. **Unsupervised Learning Exploration:** For the next phase of our research, we plan to implement several unsupervised learning approaches to complement our supervised models. We will explore DBSCAN (Density-Based Spatial Clustering of Applications with Noise) as our primary clustering algorithm due to its ability to discover clusters of arbitrary shapes without requiring a predetermined number of clusters—a valuable feature when dealing with the nuanced language patterns in cryptocurrency discussions. Additionally, we intend to compare DBSCAN's performance with other clustering techniques such as K-means (for its simplicity and efficiency with large datasets) and BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) for its memory-efficient handling of large datasets. In theory, these unsupervised approaches will provide valuable insights into the natural groupings within cryptocurrency tweets that may not be captured by supervised models. By mapping these clusters to sentiment categories, we hope to identify linguistic patterns and topic-based sentiments that could enhance our overall classification framework. The implementation will involve converting tweets to embeddings using Sentence Transformers, applying dimensionality reduction techniques, and carefully tuning clustering parameters to achieve optimal results.
+
+
 ---
 
 ## References
