@@ -31,20 +31,21 @@ The highly volatile nature of cryptocurrency markets demands sentiment analysis 
 The approach involves two primary components: data preprocessing and machine learning techniques. Data preprocessing is crucial for ensuring that the dataset is clean and representative of the cryptocurrency domain, while the machine learning techniques are designed to effectively classify sentiments in social media posts.
 
 ### Data Preprocessing
-1) **Cleaning:** Remove unnecessary elements such as crypto wallet addresses, URLs, and fix encoding errors. Filter noisy data to improve the quality of the dataset, similar to the preprocessing steps taken in cryptocurrency sentiment analysis research. Additionally, exclude short texts (less than 4 words) and remove quote tweets (which combine original and quoted text) to avoid confusion in sentiment scoring, as the model may struggle to determine whether to provide sentiment score to the original, quoted, or combined text.
+1) **Cleaning (Completed):**  Remove unnecessary elements such as crypto wallet addresses, URLs, and fix encoding errors. Filter noisy data to improve the quality of the dataset, similar to the preprocessing steps taken in cryptocurrency sentiment analysis research. Additionally, exclude short texts (less than 4 words) and remove quote tweets (which combine original and quoted text) to avoid confusion in sentiment scoring, as the model may struggle to determine whether to provide sentiment score to the original, quoted, or combined text.
 
-2) **Augmentation:** Utilize large language models (LLMs) to generate synthetic data and rephrase tweets while preserving sentiment. This technique can help increase the size and diversity of the dataset, which is crucial for improving model performance.
+2) **Text Embedding (Completed):** Transform text into numerical representations using BERT embeddings. These embeddings capture contextual information and are effective for sentiment analysis tasks.
 
-3) **Handling Imbalance:** Apply techniques such as upsampling or downsampling to balance the sentiment categories, ensuring that the model is not biased towards any particular class.
+3) **Augmentation:** Utilize large language models (LLMs) to generate synthetic data and rephrase tweets while preserving sentiment. This technique can help increase the size and diversity of the dataset, which is crucial for improving model performance.
 
-4) **Text Embedding:** Transform text into numerical representations using BERT embeddings. These embeddings capture contextual information and are effective for sentiment analysis tasks.
+4) **Handling Imbalance:** Apply techniques such as upsampling or downsampling to balance the sentiment categories, ensuring that the model is not biased towards any particular class.
 
 ### Data Split
 For the train-validation-test split we used a randomly split according to a fix random seed on the dataset (88647 data points) as follows:
 
-80% - training set (36453 data points)
-10% - validation set (4556 data points)
-10% - test set (4558 data points)
+- 80% - training set (36453 data points)
+- 10% - validation set (4556 data points)
+- 10% - test set (4558 data points)
+
 All of the splits have the similar distribution across each different classes.
 
 
@@ -85,7 +86,7 @@ Moreover, the performance of our models will be evaluated using metrics such as 
 
 ## Results and Discussion (Midterm Checkpoint)
 
-In our midterm checkpoint, we developed the baseline model with naive Logistic Regression by considering only the words as features, with the cleaning processing technique in [preprocessing.py](src/preprocessing.py). We also implemented fine-tuned versions of pre-trained BERT models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
+In our midterm checkpoint, we implemented fine-tuned versions of pre-trained BERT models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
 
 The reproducible notebooks used can be found here:
 1. [EDA.ipynb](./src/data_cleaning/eda.ipynb) 
@@ -119,9 +120,8 @@ For our initial models, we implemented a comprehensive preprocessing pipeline th
 We implemented several models to establish benchmarks and assess performance on our cryptocurrency sentiment classification task:
 
 #### Supervised Learning Models
-1. **Baseline Model:** A simple Logistic Regression model using word features to establish a performance baseline.
   
-2. **Fine-tuned BERT Models:**
+1. **Fine-tuned BERT Models:**
    - **ElKulako/stocktwits-crypto:** Fine-tuned from a model already trained on financial text with existing bullish, bearish, and neutral labels.
    - **kk08/CryptoBERT:** Adapted from a model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
 
@@ -159,6 +159,7 @@ Our initial results demonstrate that fine-tuned transformer-based models can ach
 
 1. **Unsupervised Learning Exploration:** For the next phase of our research, we plan to implement several unsupervised learning approaches to complement our supervised models. We will explore DBSCAN (Density-Based Spatial Clustering of Applications with Noise) as our primary clustering algorithm due to its ability to discover clusters of arbitrary shapes without requiring a predetermined number of clusters—a valuable feature when dealing with the nuanced language patterns in cryptocurrency discussions. Additionally, we intend to compare DBSCAN's performance with other clustering techniques such as K-means (for its simplicity and efficiency with large datasets) and BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) for its memory-efficient handling of large datasets. In theory, these unsupervised approaches will provide valuable insights into the natural groupings within cryptocurrency tweets that may not be captured by supervised models. By mapping these clusters to sentiment categories, we hope to identify linguistic patterns and topic-based sentiments that could enhance our overall classification framework. The implementation will involve converting tweets to embeddings using Sentence Transformers, applying dimensionality reduction techniques, and carefully tuning clustering parameters to achieve optimal results.
 
+2. **Supervised Learning Exploration:** We would also plan to finalize the training of BiLSTM by the final report. In theory, BiLSTM should be well-suited for capturing contextual dependencies in sequential text data, allowing it to effectively classify sentiment in tweets by considering both past and future word contexts. While we have already implemented the BERT model, we aim to explore BiLSTM as a comparison to evaluate the performance trade-offs between traditional RNN-based approaches and transformer-based models. BiLSTM offers a simpler architecture with fewer parameters, making it more computationally efficient and potentially beneficial in scenarios with limited resources. Additionally, understanding how BiLSTM performs relative to BERT on our dataset provides insights into whether complex pre-trained models are necessary or if a more lightweight approach can achieve comparable results.
 
 ---
 
@@ -183,11 +184,11 @@ Our initial results demonstrate that fine-tuned transformer-based models can ach
 
 | **Team Member**    | **Contribution(Midterm)**                            | **Contribution(Proposal)**                            |
 |--------------------|------------------------------------------------------|-------------------------------------------------------|
-| Ke Xin Chong       | 1. Data Analysis<br> 2. Visualisation<br> 3. Performance Comparison<br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
-| Joel J Jude        |                                                      | 1. Data processing <br> 2. ML model implementation              |
-| Shinhaeng Lee      |                                                      | 1. Data augmentation <br>2. preprocessing                      |
-| Wei Hong Low       |                                                      | 1. Literature review <br> 2. model evaluation                   | 
-| Abhijith Sreeraj   |                                                      | 1. Report writing <br> 2. visualization                         |
+| Ke Xin Chong       | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
+| Joel J Jude        | 1. Report Writing<br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
+| Shinhaeng Lee      | 1. Report Writing<br> 2. BiLSTM (WIP) <br> 3. Performance summarisation                                                   | 1. Data augmentation <br>2. preprocessing                      |
+| Wei Hong Low       | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 4. Report Writing                                                    | 1. Literature review <br> 2. model evaluation                   | 
+| Abhijith Sreeraj   | 1. Report Writing<br> 2. Unsupervised models implementation (WIP) <br> 3. Visualisation                                                      | 1. Report writing <br> 2. visualization                         |
 
 ## Presentation Youtube Link
 
