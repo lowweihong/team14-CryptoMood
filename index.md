@@ -161,7 +161,7 @@ We evaluated our models using several key metrics:
 | ElKulako/stocktwits-crypto finetune | 80.01               | 63.33               | 64.42               | 74.10    | 68.39    |
 | ElKulako/stocktwits-crypto baseline | 70.30               | 17.00               | 25.34               | 38.99    | 33.11    |
 
-![Model Performance Comparison](./assets/css/model_performance_comparison.png)
+![Model Performance Comparison](./assets/css/model_performance_by_metric.png)
 *Figure 1: Performance metrics across different models showing precision for each sentiment class, overall accuracy, and F1-score.*
 
 ### Analysis of Model Performance
