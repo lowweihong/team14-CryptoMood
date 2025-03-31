@@ -97,10 +97,13 @@ The reproducible notebooks used can be found here:
 For our initial models, we implemented a comprehensive preprocessing pipeline that included:
 
 1. **Text Cleaning:** We removed unnecessary elements such as URLs, wallet addresses, and special characters using regex patterns in our `preprocessing.py` module.
+   - These components do not carry useful semantic meaning for sentiment analysis and could interfere with model performance. Cleaning the text ensures cleaner, more consistent input data for the models.
 
-2. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
+3. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
+   - This step preserves the contextual relationships between words, which is crucial for understanding sentiment in financial and crypto-related language.
 
-3. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
+5. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
+   - Short texts often lack sufficient context for reliable sentiment classification, and quote tweets can introduce conflicting sentiment signals. This filtering step helped improve data quality and model accuracy.
 
 ### Model Implementation and Evaluation
 
