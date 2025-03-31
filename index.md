@@ -73,11 +73,11 @@ All of the splits have the similar distribution across each different classes.
 - **Unsupervised:**  
   - **DBSCAN Clustering**: Apply DBSCAN to detect sentiment clusters in the data. This algorithm is useful for identifying patterns and outliers in high-density regions, which can help in understanding the distribution of sentiments
 - **Supervised:**  
-  - Bert Models
+  - **Bert Models**
     - Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels. (Kulakowski & Frasincar, 2023)[[1]](#1)
     - Finetune model using pretrain model kk08/CryptoBERT, the pretrain model originally has only bullish and bearish labels. Thus, will discard the pre-trained weights of the original 2-label classification head and initialize a new classification head with random weights for 3 labels. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
     - Both of these models train for 5 epoch, and select the best models in according to the least validation loss.
-  - BiLSTM model
+  - **BiLSTM model**
     - Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets. (Chen, Zhang, & Ye, 2019)[[6]](#6)
 
 ### Libraries and Tools
@@ -177,7 +177,7 @@ Our analysis of the model performance revealed several key insights:
 
 3. **Fine-tuning Benefits:** The significant performance gap between the fine-tuned models and the baseline demonstrates the effectiveness of transfer learning for this task.
 
-In summary, **kk08/CryptoBERT** outperformed the other models, possibly due to the cleaner nature of its original training dataset, which was labeled directly by the authors. In cases where no label was assigned, the default sentiment was set to neutral. In contrast, the stephan/financial_tweets_crypto dataset used in our study contained noisier labels, as it was not annotated by the original authors, potentially leading to inconsistencies in sentiment classification..
+In summary, **kk08/CryptoBERT** outperformed the other models, possibly due to the cleaner nature of its original training dataset, which was labeled directly by the authors. In cases where no label was assigned, the default sentiment was set to neutral. In contrast, the stephan/financial_tweets_crypto dataset used in our study contained noisier labels, as it was not annotated by the original authors, potentially leading to inconsistencies in sentiment classification.
 
 <!-- Suggestion: Add confusion matrix visualization to show classification patterns -->
 
