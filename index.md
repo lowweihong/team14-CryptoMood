@@ -13,16 +13,25 @@ CryptoSentiment Pulse aims to develop an advanced NLP-based model for classifyin
 
 Despite the existence of general sentiment models, there is a scarcity of models specifically tailored for cryptocurrency-related texts. This scarcity leads to suboptimal classification accuracy when applying these models to financial contexts, where precise sentiment analysis is crucial for predicting market trends and making informed investment decisions. This research aims to bridge this gap by developing an advanced NLP-based model, CryptoSentiment Pulse, which integrates domain-specific features to improve sentiment classification in cryptocurrency-related social media posts.
 
+Recent advancements in natural language processing have shifted sentiment trend analysis toward transformer-based models, such as BERT, due to their ability to capture contextual nuances in text. For instance, (Nguyen, Vu, and Nguyen, 2020)) [[5]](#5) introduced BERTweet, a pre-trained language model specifically fine-tuned on English tweets, demonstrating its effectiveness in processing the unique linguistic patterns.
+
 ---
 
 ## Problem Definition
 
 Current sentiment analysis models often struggle to accurately capture the unique and rapidly evolving terminology used in cryptocurrency discussions. This limitation is exacerbated by the high volatility and specialized nature of cryptocurrency markets, leading to suboptimal sentiment classification and potentially impacting trading decisions. Currently, there are no open-source models specifically designed for analyzing crypto sentiment in tweets. The only existing model is limited to two predicted classes—bullish and negative—which fails to account for the prevalence of neutral sentiment in tweet text. To address this gap, there is a clear need for a three-class model that includes bullish, bearish, and neutral categories to better capture the full range of sentiments expressed on X platform.
 
+
+
+
+
+
 ---
 
 **Motivation:**  
 The highly volatile nature of cryptocurrency markets demands sentiment analysis models that go beyond generic NLP techniques. Traditional models often fail to capture the nuances of financial discourse, market sentiment shifts, and domain-specific jargon unique to crypto. By incorporating domain-specific features tailored to the cryptocurrency sector, a specialized model can provide deeper insights, more accurate sentiment predictions, and ultimately empower investors with data-driven strategies to navigate market fluctuations effectively.
+
+
 
 ---
 
@@ -54,11 +63,11 @@ All of the splits have the similar distribution across each different classes.
   - **DBSCAN Clustering**: Apply DBSCAN to detect sentiment clusters in the data. This algorithm is useful for identifying patterns and outliers in high-density regions, which can help in understanding the distribution of sentiments
 - **Supervised:**  
   - Bert Models
-    - Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels.
+    - Finetune model using pretrain model ElKulako/stocktwits-crypto, the pretrain model originally has bullish, bearish and neutral labels. (Kulakowski & Frasincar, 2023)[[1]](#1)
     - Finetune model using pretrain model kk08/CryptoBERT, the pretrain model originally has only bullish and bearish labels. Thus, will discard the pre-trained weights of the original 2-label classification head and initialize a new classification head with random weights for 3 labels. These models are known for their ability to capture complex linguistic patterns and can be effectively adapted for domain-specific tasks. (Roumeliotis, Tselikas, & Nasiopoulos, 2024)[[4]](#4)
     - Both of these models train for 5 epoch, and select the best models in according to the least validation loss.
   - BiLSTM model
-    - Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets
+    - Implement a Bidirectional Long Short-Term Memory (BiLSTM) network to capture sequential context in text data. This architecture is particularly useful for modeling temporal relationships and has been applied in sentiment analysis for cryptocurrency markets. (Chen, Zhang, & Ye, 2019)[[6]](#6)
 
 ### Libraries and Tools
 These methods utilize libraries such as scikit-learn for clustering, Hugging Face transformers for pre-trained models, and PyTorch for implementing neural networks.
@@ -172,6 +181,9 @@ Our initial results demonstrate that fine-tuned transformer-based models can ach
 
 <a id="4">[4]</a> Roumeliotis, K. I., Tselikas, N. D., & Nasiopoulos, D. K. (2024). LLMs and NLP Models in Cryptocurrency Sentiment Analysis: A Comparative Classification Study. Big Data and Cognitive Computing, 8(6), 63. https://doi.org/10.3390/bdcc8060063
 
+<a id='5'>[5]</a> Nguyen, D. Q., Vu, T., & Nguyen, A. T. (2020). BERTweet: A pre-trained language model for English Tweets. In Q. Liu & D. Schlangen (Eds.), Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations (pp. 9–14). Association for Computational Linguistics. https://doi.org/10.18653/v1/2020.emnlp-demos.2
+
+<a id='6'>[6]</a> Chen, X., Zhang, T., & Ye, Y. (2019). Sentiment analysis of comment texts based on BiLSTM. IEEE Access, 7, 51176–51185. https://doi.org/10.1109/ACCESS.2019.2909918
 ---
 
 ## Gantt Chart
