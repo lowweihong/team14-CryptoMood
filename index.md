@@ -106,7 +106,7 @@ Moreover, the performance of our models will be evaluated using metrics such as 
 
 ## Results and Discussion (Midterm Checkpoint)
 
-In our midterm checkpoint, we implemented fine-tuned versions of pre-trained BERT models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
+In our midterm checkpoint, we implemented fine-tuned versions of pre-trained BERT and RoBERTa models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
 
 The reproducible notebooks used can be found here:
 1. [EDA.ipynb](./src/data_cleaning/eda.ipynb) 
@@ -147,9 +147,9 @@ We implemented several models to establish benchmarks and assess performance on 
 
 #### Supervised Learning Models
   
-1. **Fine-tuned BERT Models:**
-   - **ElKulako/stocktwits-crypto:** Fine-tuned from a model already trained on financial text with existing bullish, bearish, and neutral labels.
-   - **kk08/CryptoBERT:** Adapted from a model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
+1. **Fine-tuned BERT and RoBERTa Models:**
+   - **ElKulako/stocktwits-crypto:** Fine-tuned from a RoBERTa model already trained on financial text with existing bullish, bearish, and neutral labels.
+   - **kk08/CryptoBERT:** Adapted from a BERT model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
 
 #### Performance Metrics
 
@@ -162,7 +162,7 @@ We evaluated our models using several key metrics:
 | ElKulako/stocktwits-crypto baseline | 70.30               | 17.00               | 25.34               | 38.99    | 33.11    |
 
 ![Model Performance Comparison](./assets/css/model_performance_by_metric.png)
-*Figure 1: Performance metrics across different models showing precision for each sentiment class, overall accuracy, and F1-score.*
+*Figure 1: Comparing Crypto Sentiment Models – Precision, Accuracy, and F1-Score for Fine-Tuned CryptoBERT, Stocktwits-Crypto, and Baseline.*
 
 ### Analysis of Model Performance
 
@@ -173,6 +173,8 @@ Our analysis of the model performance revealed several key insights:
 2. **Class Imbalance Impact:** All models showed better performance on the majority class (Bullish) compared to minority classes (Neutral and Bearish).
 
 3. **Fine-tuning Benefits:** The significant performance gap between the fine-tuned models and the baseline demonstrates the effectiveness of transfer learning for this task.
+
+In summary, **kk08/CryptoBERT** outperformed the other models, possibly due to the cleaner nature of its original training dataset, which was labeled directly by the authors. In cases where no label was assigned, the default sentiment was set to neutral. In contrast, the stephan/financial_tweets_crypto dataset used in our study contained noisier labels, as it was not annotated by the original authors, potentially leading to inconsistencies in sentiment classification..
 
 <!-- Suggestion: Add confusion matrix visualization to show classification patterns -->
 
@@ -219,7 +221,7 @@ Our initial results demonstrate that fine-tuned transformer-based models can ach
 | Ke Xin Chong       | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
 | Joel J Jude        | 1. Report Writing<br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
 | Shinhaeng Lee      | 1. Report Writing<br> 2. BiLSTM (WIP) <br> 3. Performance summarisation                                                   | 1. Data augmentation <br>2. preprocessing                      |
-| Wei Hong Low       | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 4. Report Writing                                                    | 1. Literature review <br> 2. model evaluation                   | 
+| Wei Hong Low       | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 3. Report Writing<br> 4. Cleaning method implementation                                                    | 1. Literature review <br> 2. model evaluation                   | 
 | Abhijith Sreeraj   | 1. Report Writing<br> 2. Unsupervised models implementation (WIP) <br> 3. Visualisation                                                      | 1. Report writing <br> 2. visualization                         |
 
 ## Presentation Youtube Link
