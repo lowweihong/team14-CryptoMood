@@ -99,11 +99,20 @@ For our initial models, we implemented a comprehensive preprocessing pipeline th
 1. **Text Cleaning:** We removed unnecessary elements such as URLs, wallet addresses, and special characters using regex patterns in our `preprocessing.py` module.
    - These components do not carry useful semantic meaning for sentiment analysis and could interfere with model performance. Cleaning the text ensures cleaner, more consistent input data for the models.
 
-3. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
+2. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
    - This step preserves the contextual relationships between words, which is crucial for understanding sentiment in financial and crypto-related language.
 
-5. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
+3. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
    - Short texts often lack sufficient context for reliable sentiment classification, and quote tweets can introduce conflicting sentiment signals. This filtering step helped improve data quality and model accuracy.
+
+### Chosen Models
+1. **ElKulako/stocktwits-crypto baseline**
+   - It provides a quick, interpretable starting point for evaluating the effectiveness of more complex models while it lacks the depth of contextual understanding.
+2. **ElKulako/stocktwits-crypto finetune**
+   - We selected this model because it is already fine-tuned on financial social media text from StockTwits, a platform known for investment-related sentiment. It was specifically trained with bullish, bearish, and neutral sentiment labels, which perfectly align with our classification goals. This domain alignment reduces the amount of task-specific fine-tuning required and helps the model generalize well to our crypto-related sentiment data. By leveraging its pre-learned understanding of financial terminology and sentiment, we gain a strong starting point for accurate predictions with minimal retraining effort.
+3. **kk08/CryptoBERT finetune**
+   - This model was chosen due to its pre-training on cryptocurrency-specific text, giving it an inherent understanding of the vocabulary, slang, and market dynamics unique to the crypto domain. Although it was originally trained for binary classification (bullish vs. bearish), we modified it by replacing the classification head to support three sentiment classes, allowing it to fit our task. This adaptation retained the model’s domain-specific strengths while making it flexible for multi-class classification. Using CryptoBERT ensures that the model can better interpret the nuanced language used in crypto discussions, which traditional general-purpose models might miss.
+
 
 ### Model Implementation and Evaluation
 
@@ -111,7 +120,7 @@ We implemented several models to establish benchmarks and assess performance on 
 
 #### Supervised Learning Models
 1. **Baseline Model:** A simple Logistic Regression model using word features to establish a performance baseline.
-
+  
 2. **Fine-tuned BERT Models:**
    - **ElKulako/stocktwits-crypto:** Fine-tuned from a model already trained on financial text with existing bullish, bearish, and neutral labels.
    - **kk08/CryptoBERT:** Adapted from a model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
