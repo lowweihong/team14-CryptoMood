@@ -153,6 +153,9 @@ We implemented several models to establish benchmarks and assess performance on 
 1. **Fine-tuned BERT and RoBERTa Models:**
    - **ElKulako/stocktwits-crypto:** Fine-tuned from a RoBERTa model already trained on financial text with existing bullish, bearish, and neutral labels.
    - **kk08/CryptoBERT:** Adapted from a BERT model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
+  
+2. **Bidirectional LSTM:**
+   - 
 
 #### Performance Metrics
 
