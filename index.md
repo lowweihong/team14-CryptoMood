@@ -108,17 +108,11 @@ Moreover, the performance of our models will be evaluated using metrics such as 
 
 In our midterm checkpoint, we implemented fine-tuned versions of pre-trained BERT and RoBERTa models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
 
-The reproducible notebooks used can be found here:
-1. [EDA.ipynb](./src/data_cleaning/eda.ipynb) 
-2. [kk08_cryptobert_finetune.ipynb](./src/models/kk08_cryptobert_finetune.ipynb)
-3. [ElKulako_stocktwits_crypto_finetune.ipynb](./src/models/ElKulako_stocktwits_crypto_finetune.ipynb)
-4. [ElKulako_stocktwits_crypto_baseline.ipynb](./src/models/ElKulako_stocktwits_crypto_baseline.ipynb)
-
 ### Data Preprocessing Implementation
 For our initial models, we implemented a comprehensive preprocessing pipeline that included:
 
 1. **Text Cleaning:** 
-   - For fine-tuning or evaluating the ElKulako/stocktwits-crypto model, we follow the same text-cleaning methods as outlined in the original paper in order to maintain consistency with the model's original training conditions. This ensures that our results are comparable and that the model's performance is evaluated under similar preprocessing conditions. The preprocessing steps includes includes removing unnecessary elements such as URLs, wallet addresses, special characters using regex patterns and etc.
+   - For fine-tuning or evaluating the ElKulako/stocktwits-crypto model, we follow the same text-cleaning methods as outlined in the original paper in order to maintain consistency with the model's original training conditions. This ensures that our results are comparable and that the model's performance is evaluated under similar preprocessing conditions. The preprocessing steps includes removing unnecessary elements such as URLs, wallet addresses, special characters using regex patterns and etc.
 
    - For other models, we adopt a simpler and more minimalistic preprocessing approach to preserve the structure of the tweets, allowing deep learning models to learn more effectively. This involves removing URLs, eliminating retweet prefixes, stripping specific patterns, and cleaning up extra spaces.
 
