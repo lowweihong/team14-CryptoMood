@@ -124,7 +124,7 @@ For our initial models, we implemented a comprehensive preprocessing pipeline th
 
    - kk08/CryptoBERT: This model follows the standard WordPiece tokenization used in BERT, which efficiently breaks down rare words into subwords. This ensures robust tokenization for domain-specific words while maintaining compatibility with BERT-based architectures.
 
-3. **Data Filtering:** We excluded short texts (fewer than 4 words) and removed quote tweets to avoid confusion in sentiment scoring.
+3. **Data Filtering:** We excluded short texts (fewer than 2 words) and removed quote tweets to avoid confusion in sentiment scoring.
    - Short texts (e.g., #1inch, $OP) often lack meaningful context, making it difficult for the model to infer sentiment. Including such texts could introduce noise and negatively impact model performance.
 
    - Quote tweets contain both the original tweet and the user’s comment, making sentiment classification ambiguous. The model may struggle to determine whether the sentiment applies to the quoted content, the comment, or both, leading to inconsistent predictions. Thus it is removed.
