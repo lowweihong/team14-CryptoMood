@@ -169,7 +169,7 @@ We evaluated our models using several key metrics:
 | kk08/CryptoBERT finetune            | 81.79               | 65.55               | 62.19               | 75.01    | 69.79    |
 | ElKulako/stocktwits-crypto finetune | 80.01               | 63.33               | 64.42               | 74.10    | 68.39    |
 | ElKulako/stocktwits-crypto baseline | 70.30               | 17.00               | 25.34               | 38.99    | 33.11    |
-| crypto_BiLSTM                       | 76.56               | 58.48               | 60.07               | 70.95    | 70.02    |
+| crypto_BiLSTM                       | 78.00               | 55.89               | 58.83               | 70.65    | 62.88    |
 
 
 ![Model Performance Comparison](./assets/css/comparison_chart.png)
