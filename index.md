@@ -172,8 +172,8 @@ We evaluated our models using several key metrics:
 | crypto_BiLSTM                       | 76.56               | 58.48               | 60.07               | 70.95    | 70.02    |
 
 
-![Model Performance Comparison](./assets/css/model_performance_by_metric.png)
-*Figure 1: Comparing Crypto Sentiment Models – Precision, Accuracy, and F1-Score for Fine-Tuned CryptoBERT, Stocktwits-Crypto, and Baseline.*
+![Model Performance Comparison](./assets/css/comparison_chart.png)
+*Figure 1: Comparing Crypto Sentiment Models – Precision, Accuracy, and F1-Score.*
 
 ### Analysis of Model Performance
 
