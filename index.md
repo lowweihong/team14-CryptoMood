@@ -158,7 +158,7 @@ We implemented several models to establish benchmarks and assess performance on 
    - **kk08/CryptoBERT:** Adapted from a BERT model pre-trained on cryptocurrency text but with only bullish and bearish labels originally. We discarded the pre-trained weights of the original 2-label classification head and initialized a new 3-label classification head.
   
 2. **Bidirectional LSTM:**
-   - 
+   - built using PyTorch. It consists of an embedding layer initialized with a vocabulary size and 128-dimensional embeddings, followed by a two-layer bidirectional LSTM with 256 hidden units per direction. The model concatenates the final forward and backward hidden states, applies dropout for regularization, and uses a fully connected layer to predict one of three sentiment classes.
 
 #### Performance Metrics
 
