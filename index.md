@@ -107,12 +107,12 @@ The use of pre-trained models like CryptoBERT, as discussed by (Kulakowski & Fra
 
 Moreover, the performance of our models will be evaluated using metrics such as the F1 score, which provides a balanced measure of precision and recall, especially useful in imbalanced datasets. Additionally, metrics like Cohen's Kappa can be employed to assess the agreement between model predictions and human annotations, accounting for chance agreement
 
-## Results and Discussion (Midterm Checkpoint)
+## Results and Discussion
 
 In our midterm checkpoint, we implemented fine-tuned versions of pre-trained BERT and RoBERTa models on the `StephanAkkerman/financial-tweets-crypto` dataset, evaluating performance on the same train and test splits.
 
 ### Data Preprocessing Implementation
-For our initial models, we implemented a comprehensive preprocessing pipeline that included:
+For our models, we implemented a comprehensive preprocessing pipeline that included:
 
 1. **Text Cleaning:** 
    - For fine-tuning or evaluating the ElKulako/stocktwits-crypto model, we follow the same text-cleaning methods as outlined in the original paper in order to maintain consistency with the model's original training conditions. This ensures that our results are comparable and that the model's performance is evaluated under similar preprocessing conditions. The preprocessing steps includes removing unnecessary elements such as URLs, wallet addresses, special characters using regex patterns and etc.
@@ -223,18 +223,12 @@ This pattern of mixed clusters dominated by the majority 'Bullish' class was typ
 **Unsupervised Clustering Performance:**
 Our exploration into unsupervised clustering (HDBSCAN, KMeans, BIRCH) revealed significant challenges in separating tweets based purely on sentiment using embedding structure. As shown in the results table, ARI and NMI scores were consistently close to zero, indicating that the cluster assignments were near random compared to the ground truth sentiment labels. Both KMeans and BIRCH produced clusters heavily dominated by the majority 'Bullish' class, failing to isolate distinct Neutral or Bearish groups. HDBSCAN, while capable of identifying noise (often capturing 35-45% of the data points), also struggled to form sentiment-pure clusters. Even after extensive parameter tuning across embedding models, distance metrics, UMAP settings, and HDBSCAN parameters, the resulting clusters remained highly mixed. This suggests that while embeddings capture semantic meaning, the semantic differences between Bullish, Neutral, and Bearish tweets in this dataset might be too subtle or overlapping for these unsupervised algorithms to effectively distinguish without explicit label guidance. The clusters likely formed around topics or writing styles rather than sentiment polarity alone.
 
-<!-- Suggestion: Add confusion matrix visualization to show classification patterns -->
 
 ### Summary and Next Steps
 
 #### Summary
-Our initial results demonstrate that fine-tuned transformer-based models can achieve promising performance on cryptocurrency sentiment analysis, with the best model (kk08/CryptoBERT) achieving 75.01% accuracy and a macro F1-score of 69.79%.
+Our comprehensive evaluation across supervised and unsupervised approaches revealed distinct performance characteristics. Fine-tuned transformer models, particularly `kk08/CryptoBERT` which benefited from domain-specific pre-training, demonstrated the strongest performance, achieving 75.01% accuracy and a macro F1-score of 69.80%. The fine-tuned `ElKulako/stocktwits-crypto` model also performed well (74.10% accuracy, 68.39% F1), significantly outperforming its baseline version and showcasing the benefits of transfer learning. Our BiLSTM model offered a more lightweight alternative, achieving respectable results (70.65% accuracy, 62.88% F1) but lagging behind the transformers in capturing sentiment nuances. In contrast, our exploration of unsupervised clustering techniques (HDBSCAN, K-Means, BIRCH) showed that these methods struggled substantially to group tweets by sentiment based on embeddings alone, yielding near-zero ARI/NMI scores and highly mixed clusters. This underscores the complexity of the task and the effectiveness of supervised, particularly transformer-based, models for cryptocurrency sentiment classification on this dataset.
 
-#### Next Steps
-
-1. **Unsupervised Learning Exploration:** For the next phase of our research, we plan to implement several unsupervised learning approaches to complement our supervised models. We will explore DBSCAN (Density-Based Spatial Clustering of Applications with Noise) as our primary clustering algorithm due to its ability to discover clusters of arbitrary shapes without requiring a predetermined number of clusters—a valuable feature when dealing with the nuanced language patterns in cryptocurrency discussions. Additionally, we intend to compare DBSCAN's performance with other clustering techniques such as K-means (for its simplicity and efficiency with large datasets) and BIRCH (Balanced Iterative Reducing and Clustering using Hierarchies) for its memory-efficient handling of large datasets. In theory, these unsupervised approaches will provide valuable insights into the natural groupings within cryptocurrency tweets that may not be captured by supervised models. By mapping these clusters to sentiment categories, we hope to identify linguistic patterns and topic-based sentiments that could enhance our overall classification framework. The implementation will involve converting tweets to embeddings using Sentence Transformers, applying dimensionality reduction techniques, and carefully tuning clustering parameters to achieve optimal results.
-
-2. **Supervised Learning Exploration:** We would also plan to finalize the training of BiLSTM by the final report. In theory, BiLSTM should be well-suited for capturing contextual dependencies in sequential text data, allowing it to effectively classify sentiment in tweets by considering both past and future word contexts. While we have already implemented the BERT model, we aim to explore BiLSTM as a comparison to evaluate the performance trade-offs between traditional RNN-based approaches and transformer-based models. BiLSTM offers a simpler architecture with fewer parameters, making it more computationally efficient and potentially beneficial in scenarios with limited resources. Additionally, understanding how BiLSTM performs relative to BERT on our dataset provides insights into whether complex pre-trained models are necessary or if a more lightweight approach can achieve comparable results.
 
 ---
 
