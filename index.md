@@ -257,17 +257,19 @@ Our comprehensive evaluation across supervised and unsupervised approaches revea
 
 ![Gantt Chart](assets/css/gantt-chart-midterm.png)  
 
+Link to gantt chart: https://docs.google.com/spreadsheets/d/1y9b6WQVudMHtuBCDfbBbvAzks5EHBCbi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true
+
 ---
 
 ## Contribution Table
 
-| **Team Member**    | **Contribution(Midterm)**                            | **Contribution(Proposal)**                            |
-|--------------------|------------------------------------------------------|-------------------------------------------------------|
-| Ke Xin Chong       | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
-| Joel J Jude        | 1. Report Writing<br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
-| Shinhaeng Lee      | 1. Report Writing<br> 2. BiLSTM (WIP) <br> 3. Performance summarisation                                                   | 1. Data augmentation <br>2. preprocessing                      |
-| Wei Hong Low       | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 3. Report Writing<br> 4. Cleaning method implementation                                                    | 1. Literature review <br> 2. model evaluation                   | 
-| Abhijith Sreeraj   | 1. Report Writing<br> 2. Unsupervised models implementation (WIP) <br> 3. Visualisation                                                      | 1. Report writing <br> 2. visualization                         |
+| **Team Member**    | **Contribution(Final Report)**                            | **Contribution(Midterm)**                            | **Contribution(Proposal)**                            |
+|--------------------|------------------------------------------------------|------------------------------------------------------|-------------------------------------------------------|
+| Ke Xin Chong       | 1. Report writing <br> 2. Presentation | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
+| Joel J Jude        |  | 1. Report Writing <br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
+| Shinhaeng Lee      | 1. Report writing <br> 2. Implementation of `BiLSTM` <br> 3. BiLSTM results and performance <br> 4. Presentation| 1. Report Writing<br> 2. BiLSTM (WIP) <br> 3. Performance summarisation                                                   | 1. Data augmentation <br>2. preprocessing                      |
+| Wei Hong Low       | 1. Report writing <br> 2. Presentation | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 3. Report Writing<br> 4. Cleaning method implementation                                                    | 1. Literature review <br> 2. model evaluation                   | 
+| Abhijith Sreeraj   | 1.  Report writing <br> 2. Implementation of unsupervised model (`birch`, `hdbscan`, `kmeans`) <br> 3. Unsupervised model result and performance <br> 4. Presentation |  1. Report Writing<br> 2. Unsupervised models implementation (WIP) <br> 3. Visualisation                                                      | 1. Report writing <br> 2. visualization                         |
 
 ## Presentation Youtube Link
 

@@ -24,42 +24,43 @@ The project uses the `StephanAkkerman/financial-tweets-crypto` dataset from Hugg
 - `/src/data_cleaning/eda.ipynb`: Exploratory data analysis notebook with visualizations and statistical analysis
 - `/src/data_cleaning/template.ipynb`: Template notebook for standardizing data preprocessing and model experimentation workflows
 - `/src/models/`: Contains model training and inference scripts
-- `/src/models/kmeans/`: Directory for K-means clustering experiments (WIP)
-- `/src/models/kmeans/kmeans_model.pkl`: Trained K-means model (WIP)
-- `/src/models/kmeans/kmeans.ipynb`: Notebook for K-means clustering experiments (WIP)
-- `/src/models/kmeans/tfidf_vectorizer.pkl`: Trained TF-IDF vectorizer for K-means (WIP)
-- `/src/models/ElKulako_stocktwits_crypto_finetune.ipynb`: Experiments with pre-trained RoBERTa model for fine-tuning
+- `/src/models/experimental/kmeans/`: Directory for K-means clustering with dimensionality reduction (research exploration only)
+- `/src/models/experimental/kmeans/kmeans_model.pkl`: Pickled K-means model trained on tweet embeddings
+- `/src/models/experimental/kmeans/kmeans.ipynb`: Jupyter notebook containing K-means + t-SNE visualization experimentsExperiments with TSNE
+- `/src/models/experimental/kmeans/tfidf_vectorizer.pkl`: Trained TF-IDF vectorizer for K-means
+- `/src/models/crypto_BiLSTM.ipynb`: Bidirectional LSTM implementation for sentiment analysis
+- `/src/models/crypto_birch.ipynb`: Notebook for BIRCH clustering experiments
+- `/src/models/crypto_hdbscan.ipynb`: Notebook for HDBSCAN clustering experiments
+- `/src/models/crypto_kmeans.ipynb`: Notebook for K-means clustering experiments
 - `/src/models/ElKulako_stocktwits_crypto_baseline.ipynb`: Generates baseline performance with ElKulako/stocktwits-crypto model
+- `/src/models/ElKulako_stocktwits_crypto_finetune.ipynb`: Experiments with pre-trained RoBERTa model for fine-tuning
 - `/src/models/kk08_cryptobert_finetune.ipynb`: Experiments with pre-trained BERT base model for fine-tuning
-- `/src/models/crypto_BiLSTM.ipynb`: Notebook for BiLSTM model experiments (WIP)
-- `/src/models/crypto_birch.ipynb`: Notebook for BIRCH clustering experiments (WIP)
-- `/src/models/crypto_hdbscan.ipynb`: Notebook for HDBSCAN clustering experiments (WIP)
-- `/src/models/crypto_kmeans.ipynb`: Notebook for K-means clustering experiments (WIP)
 - `/Visualizations/`: Contains notebooks for generating visualizations used in the project report
-- `/Visualizations/Visualizations.ipynb`: Notebook to generate graphs for performance comparison
+- `/Visualizations/preminilary_visualizations.ipynb`: Notebook for Initial exploratory data and results visualization
+- `/Visualizations/bar_chart.ipynb`: Performance metrics visualization and model comparison
 
 
 Tree structure:
 ```
 src/
 ├── data_cleaning/
-│   ├── eda.ipynb                                  # Data Exploration
+│   ├── eda.ipynb                                  # Exploratory data analysis notebook with visualizations and statistical analysis
 |   ├── template.ipynb                             # Template notebook for standardizing data preprocessing and model experimentation workflows
 └── models/
-   └── kmeans/
-      └── kmeans_model.pkl                         # Trained model (WIP)
-      └── kmeans.ipynb                             # Unsupervised Experiments (WIP)
-      └── tfidf_vectorizer.pkl                     # Trained model (WIP)
-   └── ElKulako_stocktwits_crypto_finetune.ipynb   # Generate baseline performance with ElKulako_stocktwits model
-   └── ElKulako_stocktwits_crypto_finetune.ipynb   # Experiments with pretrain Roberta model 
-   └── kk08_cryptobert_finetune.ipynb              # Experiments with pretrained Bert base model
-   └── (wip) crypto_BiLSTM.ipynb                   # BiLSTM Experiments (WIP)
-   └── (wip) crypto_birch.ipynb                    # Unsupervised Experiments (WIP)
-   └── (wip) crypto_hdbscan.ipynb                  # Unsupervised Experiments (WIP)
-   └── (wip) crypto_kmeans.ipynb                   # Unsupervised Experiments (WIP)
-└── Visualizations/                                # Contains notebooks for generating visualizations
-   └── Visualizations.ipynb                        # Notebook to generate graph for performance comparison
-   
-
+   └── experimental/                               # Research exploration and prototype implementations
+      └── kmeans/                                  # K-means clustering with dimensionality reduction
+         └── kmeans_model.pkl                      # Pickled K-means model trained on tweet embeddings
+         └── kmeans.ipynb                          # Jupyter notebook containing K-means + t-SNE visualization experimentsExperiments with TSNE
+         └── tfidf_vectorizer.pkl                  # Pickled TF-IDF vectorizer for text feature extraction
+   └── crypto_BiLSTM.ipynb                         # Bidirectional LSTM implementation for sentiment analysis
+   └── crypto_birch.ipynb                          # Notebook for BIRCH clustering experiments
+   └── crypto_hdbscan.ipynb                        # Notebook for HDBSCAN clustering experiments
+   └── crypto_kmeans.ipynb                         # Notebook for K-means clustering experiments
+   └── ElKulako_stocktwits_crypto_baseline.ipynb   # Generate baseline performance with ElKulako_stocktwits model
+   └── ElKulako_stocktwits_crypto_finetune.ipynb   # Experiments with pre-trained RoBERTa model for fine-tuning
+   └── kk08_cryptobert_finetune.ipynb              # Experiments with pre-trained BERT base model for fine-tuning
+└── Visualizations/                                
+   └── bar_chart.ipynb                             # Performance metrics visualization and model comparison
+   └── preminilary_visualizations.ipynb            # Notebook for initial exploratory data and results visualization
 ```
 
