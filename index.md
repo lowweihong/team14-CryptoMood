@@ -119,6 +119,10 @@ For our models, we implemented a comprehensive preprocessing pipeline that inclu
 
    - For other models, we adopt a simpler and more minimalistic preprocessing approach to preserve the structure of the tweets, allowing deep learning models to learn more effectively. This involves removing URLs, eliminating retweet prefixes, stripping specific patterns, and cleaning up extra spaces.
 
+   Example: Exclude showing text cleaning result.
+   ![Text Filtering](./assets/css/text-cleaning.png)  
+   *Figure 1: Example tweets before vs after text cleaning step*
+
 2. **Tokenization:** We used the tokenizers from pre-trained models (BERT-based) to convert text into token IDs suitable for deep learning models.
    - ElKulako/stocktwits-crypto (RoBERTa-based): Since this model follows the RoBERTa architecture, it uses a byte-level Byte-Pair Encoding (BPE) tokenizer. This means the tokenization process is more flexible in handling out-of-vocabulary words, particularly financial and crypto-specific terminology. Unlike BERT, RoBERTa does not use segment embeddings, making it better suited for long financial text analysis.
 
@@ -128,6 +132,10 @@ For our models, we implemented a comprehensive preprocessing pipeline that inclu
    - Short texts (e.g., #1inch, $OP) often lack meaningful context, making it difficult for the model to infer sentiment. Including such texts could introduce noise and negatively impact model performance.
 
    - Quote tweets contain both the original tweet and the user’s comment, making sentiment classification ambiguous. The model may struggle to determine whether the sentiment applies to the quoted content, the comment, or both, leading to inconsistent predictions. Thus it is removed.
+
+   Example: Exclude short texts (<2 words) and quote tweets to reduce ambiguity.
+   ![Text Filtering](./assets/css/text-filtering.png)  
+   *Figure 2: Example tweets that will be filtered out from training data.*
 
 ### Chosen Models
 1. **ElKulako/stocktwits-crypto baseline**
@@ -173,7 +181,7 @@ We evaluated our models using several key metrics:
 
 
 ![Model Performance Comparison](./assets/css/comparison_chart.png)
-*Figure 1: Comparing Crypto Sentiment Models – Precision, Accuracy, and F1-Score.*
+*Figure 3: Comparing Crypto Sentiment Models – Precision, Accuracy, and F1-Score.*
 
 ### Analysis of Model Performance
 
@@ -223,11 +231,22 @@ This pattern of mixed clusters dominated by the majority 'Bullish' class was typ
 **Unsupervised Clustering Performance:**
 Our exploration into unsupervised clustering (HDBSCAN, KMeans, BIRCH) revealed significant challenges in separating tweets based purely on sentiment using embedding structure. As shown in the results table, ARI and NMI scores were consistently close to zero, indicating that the cluster assignments were near random compared to the ground truth sentiment labels. Both KMeans and BIRCH produced clusters heavily dominated by the majority 'Bullish' class, failing to isolate distinct Neutral or Bearish groups. HDBSCAN, while capable of identifying noise (often capturing 35-45% of the data points), also struggled to form sentiment-pure clusters. Even after extensive parameter tuning across embedding models, distance metrics, UMAP settings, and HDBSCAN parameters, the resulting clusters remained highly mixed. This suggests that while embeddings capture semantic meaning, the semantic differences between Bullish, Neutral, and Bearish tweets in this dataset might be too subtle or overlapping for these unsupervised algorithms to effectively distinguish without explicit label guidance. The clusters likely formed around topics or writing styles rather than sentiment polarity alone.
 
+Example result from birch
+![HDBSCAN Clustering Comparison](./assets/css/hdbscan.png)  
+*Figure 4: HDBSCAN Clustering Results – Sentiment Distribution Across Clusters.*
 
-### Summary and Next Steps
+![Kmeans Clustering Comparison](./assets/css/kmeans.png)  
+*Figure 5: Kmeans Clustering Results – Sentiment Distribution Across Clusters.*
 
-#### Summary
-Our comprehensive evaluation across supervised and unsupervised approaches revealed distinct performance characteristics. Fine-tuned transformer models, particularly `kk08/CryptoBERT` which benefited from domain-specific pre-training, demonstrated the strongest performance, achieving 75.01% accuracy and a macro F1-score of 69.80%. The fine-tuned `ElKulako/stocktwits-crypto` model also performed well (74.10% accuracy, 68.39% F1), significantly outperforming its baseline version and showcasing the benefits of transfer learning. Our BiLSTM model offered a more lightweight alternative, achieving respectable results (70.65% accuracy, 62.88% F1) but lagging behind the transformers in capturing sentiment nuances. In contrast, our exploration of unsupervised clustering techniques (HDBSCAN, K-Means, BIRCH) showed that these methods struggled substantially to group tweets by sentiment based on embeddings alone, yielding near-zero ARI/NMI scores and highly mixed clusters. This underscores the complexity of the task and the effectiveness of supervised, particularly transformer-based, models for cryptocurrency sentiment classification on this dataset.
+![BIRCH Clustering Comparison](./assets/css/birch_comparison.png)  
+*Figure 5: BIRCH Clustering Results – Sentiment Distribution Across Clusters.*
+
+
+### Conclusion
+
+Our comprehensive evaluation across supervised and unsupervised approaches revealed distinct performance characteristics. Fine-tuned transformer models, particularly `kk08/CryptoBERT` which benefited from domain-specific pre-training, demonstrated the strongest performance, achieving 75.01% accuracy and a macro F1-score of 69.80%. The fine-tuned `ElKulako/stocktwits-crypto` model also performed well (74.10% accuracy, 68.39% F1), significantly outperforming its baseline version and showcasing the benefits of transfer learning. Our BiLSTM model offered a more lightweight alternative, achieving respectable results (70.65% accuracy, 62.88% F1) but lagging behind the transformers in capturing sentiment nuances. 
+
+In contrast, our exploration of unsupervised clustering techniques (HDBSCAN, K-Means, BIRCH) showed that these methods struggled substantially to group tweets by sentiment based on embeddings alone, yielding near-zero ARI/NMI scores and highly mixed clusters. This underscores the complexity of the task and the effectiveness of supervised, particularly transformer-based, models for cryptocurrency sentiment classification on this dataset.
 
 
 ---
@@ -255,9 +274,11 @@ Our comprehensive evaluation across supervised and unsupervised approaches revea
 
 ## Gantt Chart
 
-![Gantt Chart](assets/css/gantt-chart-midterm.png)  
+<!-- ![Gantt Chart](assets/css/gantt-chart-midterm.png)   -->
 
-Link to gantt chart: https://docs.google.com/spreadsheets/d/1y9b6WQVudMHtuBCDfbBbvAzks5EHBCbi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true
+Access the Gantt chart here: [Google Sheets Link](https://docs.google.com/spreadsheets/d/1y9b6WQVudMHtuBCDfbBbvAzks5EHBCbi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true)
+
+Gantt Chart Download: [Download the Gantt Chart](assets/css/GanttChart-CS7641-team14.xlsx)
 
 ---
 
@@ -265,12 +286,14 @@ Link to gantt chart: https://docs.google.com/spreadsheets/d/1y9b6WQVudMHtuBCDfbB
 
 | **Team Member**    | **Contribution(Final Report)**                            | **Contribution(Midterm)**                            | **Contribution(Proposal)**                            |
 |--------------------|------------------------------------------------------|------------------------------------------------------|-------------------------------------------------------|
-| Ke Xin Chong       | 1. Report writing <br> 2. Presentation | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
-| Joel J Jude        |  | 1. Report Writing <br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
+| Ke Xin Chong       | 1. Report finalise <br> 2. Presentation | 1. Data Analysis<br> 3. Implementaton of `kk08/CryptoBERT finetune` <br> 4. Report Writing | 1. Project management<br> 2. methodology design                |
+| Joel J Jude        | - | 1. Report Writing <br> 2. Visualisation  <br> 3. Unsupervised models implementation (WIP)                                                  | 1. Data processing <br> 2. ML model implementation              |
 | Shinhaeng Lee      | 1. Report writing <br> 2. Implementation of `BiLSTM` <br> 3. BiLSTM results and performance <br> 4. Presentation| 1. Report Writing<br> 2. BiLSTM (WIP) <br> 3. Performance summarisation                                                   | 1. Data augmentation <br>2. preprocessing                      |
 | Wei Hong Low       | 1. Report writing <br> 2. Presentation | 1. Implementaton of `ElKulako/stocktwits-crypto finetune`<br> 2. Performance evaluation on `ElKulako/stocktwits-crypto finetune` baseline model <br> 3. Report Writing<br> 4. Cleaning method implementation                                                    | 1. Literature review <br> 2. model evaluation                   | 
 | Abhijith Sreeraj   | 1.  Report writing <br> 2. Implementation of unsupervised model (`birch`, `hdbscan`, `kmeans`) <br> 3. Unsupervised model result and performance <br> 4. Presentation |  1. Report Writing<br> 2. Unsupervised models implementation (WIP) <br> 3. Visualisation                                                      | 1. Report writing <br> 2. visualization                         |
 
-## Presentation Youtube Link
+## Presentations
 
 Proposal: https://youtu.be/cke5F-7VIsE
+
+Final Presentation slide: https://docs.google.com/presentation/d/1ZwxpB2YcDc5Am1qgZKe93arUrrfYALVi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true
