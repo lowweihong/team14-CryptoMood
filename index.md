@@ -294,6 +294,6 @@ Gantt Chart Download: [Download the Gantt Chart](assets/css/GanttChart-CS7641-te
 
 ## Presentations
 
-Proposal: https://youtu.be/cke5F-7VIsE
+Proposal: [https://youtu.be/cke5F-7VIsE](https://youtu.be/cke5F-7VIsE)
 
-Final Presentation slide: https://docs.google.com/presentation/d/1ZwxpB2YcDc5Am1qgZKe93arUrrfYALVi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true
+Final Presentation slide: [https://docs.google.com/presentation/d/1ZwxpB2YcDc5Am1qgZKe93arUrrfYALVi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true](https://docs.google.com/presentation/d/1ZwxpB2YcDc5Am1qgZKe93arUrrfYALVi/edit?usp=sharing&ouid=101556141320505570999&rtpof=true&sd=true)
