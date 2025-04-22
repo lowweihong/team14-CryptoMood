@@ -231,7 +231,7 @@ This pattern of mixed clusters dominated by the majority 'Bullish' class was typ
 **Unsupervised Clustering Performance:**
 Our exploration into unsupervised clustering (HDBSCAN, KMeans, BIRCH) revealed significant challenges in separating tweets based purely on sentiment using embedding structure. As shown in the results table, ARI and NMI scores were consistently close to zero, indicating that the cluster assignments were near random compared to the ground truth sentiment labels. Both KMeans and BIRCH produced clusters heavily dominated by the majority 'Bullish' class, failing to isolate distinct Neutral or Bearish groups. HDBSCAN, while capable of identifying noise (often capturing 35-45% of the data points), also struggled to form sentiment-pure clusters. Even after extensive parameter tuning across embedding models, distance metrics, UMAP settings, and HDBSCAN parameters, the resulting clusters remained highly mixed. This suggests that while embeddings capture semantic meaning, the semantic differences between Bullish, Neutral, and Bearish tweets in this dataset might be too subtle or overlapping for these unsupervised algorithms to effectively distinguish without explicit label guidance. The clusters likely formed around topics or writing styles rather than sentiment polarity alone.
 
-Example result from birch
+Example clustering results from various models
 ![HDBSCAN Clustering Comparison](./assets/css/hdbscan.png)  
 *Figure 4: HDBSCAN Clustering Results – Sentiment Distribution Across Clusters.*
 
