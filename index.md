@@ -239,7 +239,7 @@ Example result from birch
 *Figure 5: Kmeans Clustering Results – Sentiment Distribution Across Clusters.*
 
 ![BIRCH Clustering Comparison](./assets/css/birch_comparison.png)  
-*Figure 5: BIRCH Clustering Results – Sentiment Distribution Across Clusters.*
+*Figure 6: BIRCH Clustering Results – Sentiment Distribution Across Clusters.*
 
 
 ### Conclusion
