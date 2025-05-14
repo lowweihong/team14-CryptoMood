@@ -1,6 +1,6 @@
 # team14-CryptoMood
 
-For the complete project report, please see [here](https://github.gatech.edu/pages/asreeraj3/team14-CryptoMood/).
+For the complete project report, please see [here](https://github.gatech.edu/pages/wlow7/team14-CryptoMood/).
 
 ## Setup
 To run the notebooks, install the required dependencies:
