@@ -1,6 +1,7 @@
 # team14-CryptoMood
 
 For the complete project report, please see [here](https://lowweihong.github.io/team14-CryptoMood/).
+
 *Original publish page on gatech can be found [here](https://github.gatech.edu/pages/wlow7/team14-CryptoMood/).
 
 ## Setup
